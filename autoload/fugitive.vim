@@ -3730,6 +3730,9 @@ function! s:RunBufDelete(bufnr) abort
     " Directly delete the file without using command-line input
     call delete(s:resume_queue[-1][0].file . '.edit')
 
+    " Refresh the screen programmatically
+    redraw
+
     " Directly call fugitive#Resume() without using command-line input
     call fugitive#Resume()
 
