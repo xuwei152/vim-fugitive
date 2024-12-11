@@ -1,5 +1,16 @@
 # fugitive.vim
 
+This is a fork from [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive).
+
+```vim
+
+ silent! call feedkeys("\<C-\>\<C-N>:redraw!|call delete(" . string(s:resume_queue[-1][0].file . '.edit') .
+       \ ")|call fugitive#Resume()|checktime\r", 'n')
+```
+
+This function is modified so that it will be executed silently without popuping the cmdline of [noice.nvim](https://github.com/folke/noice.nvim).
+
+
 Fugitive is the premier Vim plugin for Git.  Or maybe it's the premier Git
 plugin for Vim?  Either way, it's "so awesome, it should be illegal".  That's
 why it's called Fugitive.
