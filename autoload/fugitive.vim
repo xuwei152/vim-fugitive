@@ -3723,10 +3723,18 @@ function! s:RunBufDelete(bufnr) abort
     catch
     endtry
   endif
-  if has_key(s:edit_jobs, a:bufnr) |
+  if has_key(s:edit_jobs, a:bufnr)
+    " Remove from edit_jobs and add to resume_queue
     call add(s:resume_queue, remove(s:edit_jobs, a:bufnr))
-    silent! call feedkeys("\<C-\>\<C-N>:redraw!|call delete(" . string(s:resume_queue[-1][0].file . '.edit') .
-          \ ")|call fugitive#Resume()|checktime\r", 'n')
+    
+    " Directly delete the file without using command-line input
+    call delete(s:resume_queue[-1][0].file . '.edit')
+
+    " Directly call fugitive#Resume() without using command-line input
+    call fugitive#Resume()
+
+    " Check time without command-line input
+    checktime
   endif
 endfunction
 
